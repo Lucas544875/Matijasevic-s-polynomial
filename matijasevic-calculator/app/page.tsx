@@ -7,62 +7,37 @@ import {
   Box,
   Button,
   Container,
-  FieldErrorText,
-  FieldLabel,
-  FieldRoot,
   Grid,
   GridItem,
   HStack,
   Heading,
-  Input,
   SimpleGrid,
   Stack,
   Text,
-  VStack,
   chakra,
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useWatch, type UseFormRegister } from 'react-hook-form';
-import { z } from 'zod';
+import { useForm, useWatch } from 'react-hook-form';
 import {
   PARAMETER_KEYS,
-  type ParameterKey,
-  type ParameterValues,
   evaluatePolynomial,
   generateRandomParameters,
-  type ValueStatus,
 } from '../lib/polynomial';
-
-const integerStringSchema = z
-  .string()
-  .trim()
-  .refine(
-    (value) => {
-      if (value === '') return false;
-      try {
-        BigInt(value);
-        return true;
-      } catch {
-        return false;
-      }
-    },
-    { message: '整数を入力してください' },
-  );
-
-const parameterSchema = z.object(
-  Object.fromEntries(
-    PARAMETER_KEYS.map((key) => [key, integerStringSchema]),
-  ) as Record<ParameterKey, typeof integerStringSchema>,
-);
-
-type ParameterFormValues = z.infer<typeof parameterSchema>;
-
-const STATUS_COLOR_MAP: Record<ValueStatus, string> = {
-  positive: 'green',
-  zero: 'blue',
-  negative: 'red',
-};
+import {
+  ParameterInputField,
+  ResultCard,
+  SectionContainer,
+  SectionHeader,
+  StatusBadge,
+} from './components';
+import {
+  convertInputsToParameters,
+  convertParametersToInputs,
+  createDefaultParameterValues,
+  parameterSchema,
+  type ParameterFormValues,
+} from '../lib/parameters';
 
 const SECTION_TITLES = {
   result: '計算結果',
@@ -206,153 +181,4 @@ export default function HomePage() {
       </Stack>
     </Container>
   );
-}
-
-function SectionContainer({ children }: { children: React.ReactNode }) {
-  return (
-    <Box
-      borderWidth="1px"
-      borderRadius="lg"
-      padding={{ base: 4, md: 6 }}
-      boxShadow="xs"
-      bg="white"
-    >
-      {children}
-    </Box>
-  );
-}
-
-function SectionHeader({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <Stack gap={3} mb={5}>
-      <Heading as="h2" size="md">
-        {title}
-      </Heading>
-      <Text fontSize="sm" color="gray.600">
-        {description}
-      </Text>
-    </Stack>
-  );
-}
-
-function ResultCard({
-  label,
-  value,
-  status,
-}: {
-  label: string;
-  value: bigint;
-  status: ValueStatus;
-}) {
-  return (
-    <VStack align="stretch" gap={4}>
-      <Text fontWeight="semibold">{label}</Text>
-      <Stack direction="row" justify="space-between" align="center">
-        <chakra.span fontFamily="mono" fontSize="lg">
-          {value.toString()}
-        </chakra.span>
-        <StatusBadge status={status} />
-      </Stack>
-    </VStack>
-  );
-}
-
-function StatusBadge({ status }: { status: ValueStatus }) {
-  return (
-    <Badge colorScheme={STATUS_COLOR_MAP[status]} variant="solid">
-      {status === 'positive'
-        ? '正'
-        : status === 'negative'
-          ? '負'
-          : 'ゼロ'}
-    </Badge>
-  );
-}
-
-function ParameterInputField({
-  name,
-  register,
-  conditionCount,
-  error,
-}: {
-  name: ParameterKey;
-  register: UseFormRegister<ParameterFormValues>;
-  conditionCount: number;
-  error?: string;
-}) {
-  const registration = register(name);
-  const isInvalid = Boolean(error);
-  return (
-    <FieldRoot invalid={isInvalid}>
-      <FieldLabel fontSize="sm" fontWeight="semibold">
-        {name.toUpperCase()}
-      </FieldLabel>
-      <Input
-        {...registration}
-        aria-invalid={isInvalid}
-        inputMode="numeric"
-        placeholder="0"
-        />
-      <Text mt={1} fontSize="xs" color="gray.500">
-        条件達成: <ConditionBadge count={conditionCount} />
-      </Text>
-      {error ? (
-        <FieldErrorText fontSize="xs" mt={1}>
-          {error}
-        </FieldErrorText>
-      ) : null}
-    </FieldRoot>
-  );
-}
-
-function ConditionBadge({ count }: { count: number }) {
-  const colorScheme = count > 0 ? 'green' : 'gray';
-  return (
-    <Badge colorScheme={colorScheme} variant="subtle">
-      {count}
-    </Badge>
-  );
-}
-
-function createDefaultParameterValues(): ParameterFormValues {
-  return Object.fromEntries(
-    PARAMETER_KEYS.map((key) => [key, '0']),
-  ) as ParameterFormValues;
-}
-
-function convertInputsToParameters(
-  inputs: Partial<ParameterFormValues>,
-): ParameterValues {
-  const entries = PARAMETER_KEYS.map<[ParameterKey, bigint]>((key) => {
-    const source = inputs[key] ?? '0';
-    const rawValue = source.trim();
-    return [key, parseBigIntSafely(rawValue)];
-  });
-  return Object.fromEntries(entries) as ParameterValues;
-}
-
-function convertParametersToInputs(params: ParameterValues): ParameterFormValues {
-  const entries = PARAMETER_KEYS.map<[ParameterKey, string]>((key) => [
-    key,
-    params[key].toString(),
-  ]);
-  return Object.fromEntries(entries) as ParameterFormValues;
-}
-
-function parseBigIntSafely(value: string): bigint {
-  if (value === '' || value === '-' || value === '+') {
-    return 0n;
-  }
-
-  try {
-    return BigInt(value);
-  } catch {
-    return 0n;
-  }
 }
