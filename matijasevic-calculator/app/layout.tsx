@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" data-google-analytics-opt-out="">
       <body>
         <Providers>{children}</Providers>
       </body>
