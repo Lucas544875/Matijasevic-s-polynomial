@@ -1,8 +1,7 @@
 'use client';
 
-import { Stack, Text, VStack, chakra } from '@chakra-ui/react';
+import { Badge, Stack, Text, VStack, chakra } from '@chakra-ui/react';
 import { type ValueStatus } from '../../lib/polynomial';
-import { StatusBadge } from './status-badge';
 
 type ResultCardProps = {
   label: string;
@@ -25,7 +24,11 @@ export function ResultCard({ label, value, status }: ResultCardProps) {
         <chakra.span fontFamily="mono" fontSize="lg" wordBreak="break-all">
           {value.toString()}
         </chakra.span>
-        <StatusBadge status={status} />
+        <Badge colorPalette={status == 'positive' ? 'green' : 'red'}>
+          {status === 'positive' 
+            ? '素数！'
+            : '非素数'}
+        </Badge>
       </Stack>
     </VStack>
   );

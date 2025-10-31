@@ -4,8 +4,8 @@ import { Badge } from '@chakra-ui/react';
 import { type ValueStatus } from '../../lib/polynomial';
 
 const STATUS_COLOR_MAP: Record<ValueStatus, string> = {
-  positive: 'green',
-  zero: 'blue',
+  positive: 'red',
+  zero: 'green',
   negative: 'red',
 };
 
@@ -15,12 +15,10 @@ type StatusBadgeProps = {
 
 export function StatusBadge({ status }: StatusBadgeProps) {
   return (
-    <Badge colorScheme={STATUS_COLOR_MAP[status]} variant="solid">
-      {status === 'positive'
-        ? '正'
-        : status === 'negative'
-          ? '負'
-          : 'ゼロ'}
+    <Badge colorPalette={STATUS_COLOR_MAP[status]} >
+      {status === 'positive' || status === 'negative'
+        ? 'nonzero'
+        : 'zero'}
     </Badge>
   );
 }
