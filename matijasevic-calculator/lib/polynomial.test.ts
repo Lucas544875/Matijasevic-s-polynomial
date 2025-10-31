@@ -74,7 +74,7 @@ describe('generateRandomParameters', () => {
     PARAMETER_KEYS.forEach((key) => {
       const value = params[key];
       expect(typeof value).toBe('bigint');
-      expect(value).toBeGreaterThanOrEqual(-10n);
+      expect(value).toBeGreaterThanOrEqual(0n);
       expect(value).toBeLessThanOrEqual(10n);
     });
   });

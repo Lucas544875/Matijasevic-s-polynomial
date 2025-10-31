@@ -228,7 +228,7 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
 ];
 
 export const DEFAULT_RANDOM_RANGE = {
-  min: -10,
+  min: 0,
   max: 10,
 } as const;
 
@@ -236,10 +236,12 @@ export function generateRandomParameters(
   min = DEFAULT_RANDOM_RANGE.min,
   max = DEFAULT_RANDOM_RANGE.max,
 ): ParameterValues {
+  const safeMin = Math.max(0, Math.floor(min));
+  const safeMax = Math.max(safeMin, Math.floor(max));
+
   return PARAMETER_KEYS.reduce<ParameterValues>((acc, key) => {
     const value = BigInt(
-      Math.floor(Math.random() * (Number(max) - Number(min) + 1)) +
-        Number(min),
+      Math.floor(Math.random() * (safeMax - safeMin + 1)) + safeMin,
     );
     acc[key] = value;
     return acc;

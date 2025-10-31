@@ -40,6 +40,7 @@ export function ParameterInputField({
         render={({ field }) => (
           <NumberInput.Root
             value={field.value ?? 0n}
+            min={0}
             onValueChange={
               ({ value }) => field.onChange(value)
             }

@@ -19,6 +19,16 @@ const integerStringSchema = z
       }
     },
     { message: '整数を入力してください' },
+  )
+  .refine(
+    (value) => {
+      try {
+        return BigInt(value) >= 0n;
+      } catch {
+        return false;
+      }
+    },
+    { message: '0以上の整数を入力してください' },
   );
 
 export const parameterSchema = z.object(
@@ -62,7 +72,8 @@ function parseBigIntSafely(value: string): bigint {
   }
 
   try {
-    return BigInt(value);
+    const parsed = BigInt(value);
+    return parsed < 0n ? 0n : parsed;
   } catch {
     return 0n;
   }
