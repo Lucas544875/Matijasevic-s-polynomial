@@ -31,7 +31,7 @@ export function ParameterInputField({
   return (
     <FieldRoot invalid={isInvalid}>
       <FieldLabel fontSize="sm" fontWeight="semibold">
-        {name.toUpperCase()}
+        {name}
       </FieldLabel>
       <Input
         {...registration}
