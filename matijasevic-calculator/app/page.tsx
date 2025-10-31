@@ -3,16 +3,15 @@
 import { useMemo } from 'react';
 import {
   Accordion,
-  Badge,
-  Box,
   Button,
+  Card,
   Container,
   Grid,
   GridItem,
-  HStack,
   Heading,
   SimpleGrid,
   Stack,
+  Span,
   Text,
   chakra,
 } from '@chakra-ui/react';
@@ -91,7 +90,7 @@ export default function HomePage() {
           <Accordion.Root collapsible>
             <Accordion.Item value="">
               <Accordion.ItemTrigger>
-                <Span flex="1" fontWeight="semibold">Matijasevic 多項式の明示式</Span>
+                <Span flex="1" fontWeight="semibold">Matijasevic 多項式</Span>
                 <Accordion.ItemIndicator/>
               </Accordion.ItemTrigger>
               <Accordion.ItemContent>
@@ -117,7 +116,7 @@ export default function HomePage() {
                 description={descriptionText.result}
               />
               <ResultCard
-                label="最終値"
+                label="P(a,b, ... , z)="
                 value={calculation.final.value}
                 status={calculation.final.status}
               />
@@ -130,33 +129,26 @@ export default function HomePage() {
                 title={SECTION_TITLES.partials}
                 description={descriptionText.partials}
               />
-              <Accordion.Root multiple>
-                {calculation.partials.map((partial) => (
-                  <Accordion.Item key={partial.id} value={partial.id}>
-                    <Accordion.ItemTrigger>
-                      <HStack justify="space-between" align="center" w="full">
-                        <Box textAlign="left">
-                          <Text fontWeight="semibold">{partial.label}</Text>
-                          <HStack gap={3} mt={2}>
-                            <StatusBadge status={partial.status} />
-                            {partial.zeroRequired ? (
-                              <Badge colorScheme="purple">ゼロ条件</Badge>
-                            ) : null}
-                          </HStack>
-                        </Box>
-                        <Accordion.ItemIndicator />
-                      </HStack>
-                    </Accordion.ItemTrigger>
-                    <Accordion.ItemContent>
-                      <Accordion.ItemBody>
-                        <Text fontFamily="mono" fontSize="sm">
-                          {partial.value.toString()}
-                        </Text>
-                      </Accordion.ItemBody>
-                    </Accordion.ItemContent>
-                  </Accordion.Item>
-                ))}
-              </Accordion.Root>
+              {calculation.partials.map((partial) => (
+                <Card.Root size="sm" margin={"2"} key={partial.label}>
+                  <Card.Header paddingTop={"2"} fontWeight="semibold">
+                    {partial.label} =
+                  </Card.Header>
+                  <Card.Body paddingY={"2"}>
+                    <Stack  direction={{ base: 'column', md: 'row' }}
+                    justify="space-between"
+                    align={{ base: 'flex-start', md: 'center' }}
+                    gap={4}
+                    flexWrap="wrap"
+                    w="full">
+                      <Span fontFamily="mono" fontSize="lg" wordBreak="break-all">
+                        {partial.value.toString()}
+                      </Span>
+                      <StatusBadge status={partial.status} />
+                    </Stack>
+                  </Card.Body>
+                </Card.Root>
+              ))}
             </SectionContainer>
           </GridItem>
 
