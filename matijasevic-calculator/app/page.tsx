@@ -16,10 +16,12 @@ import {
   Text,
   chakra,
 } from '@chakra-ui/react';
+import { BlockMath } from 'react-katex';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import {
   PARAMETER_KEYS,
+  JSWW_POLY_TEX,
   evaluatePolynomial,
   generateRandomParameters,
 } from '../lib/polynomial';
@@ -40,7 +42,7 @@ import {
 
 const SECTION_TITLES = {
   result: '計算結果',
-  partials: '部分計算結果',
+  partials: '部分式計算結果',
   parameters: 'パラメータ指定',
 } as const;
 
@@ -79,13 +81,14 @@ export default function HomePage() {
   return (
     <Container maxW="7xl" py={{ base: 8, md: 12 }} px={{ base: 4, md: 6 }}>
       <Stack gap={{ base: 8, md: 12 }}>
-        <Stack gap={2}>
+        <Stack gap={4}>
           <Heading as="h1" size="lg">
             Matijasevic 多項式インタラクティブ計算
           </Heading>
           <Text color="gray.600" fontSize="md">
             26個のパラメータを指定して多項式を代入し、結果と必要な部分式の達成度をリアルタイムに確認できます。
           </Text>
+          <BlockMath math={JSWW_POLY_TEX} />
         </Stack>
 
         <Grid

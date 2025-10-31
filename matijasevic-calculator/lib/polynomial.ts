@@ -291,6 +291,24 @@ export const JSWW_POLY_ASCII = `P(a,b,...,z) = (k+2)*(1
   - (z + p*l*(a - p) + t*(2*a*p - p^2 - 1) - p*m)^2
 )`;
 
+export const JSWW_POLY_TEX = String.raw`\begin{aligned}
+P(a,b,\ldots,z) ={}
+& (k+2)\Biggl(1 - (w z + h + j - q)^2 \\
+&\quad - ((g k + 2 g + k + 1)(h + j) + h - z)^2 \\
+&\quad - (2 n + p + q + z - e)^2 \\
+&\quad - \bigl(16 (k+1)^{3} (k+2) (n+1)^{2} + 1 - f^{2}\bigr)^{2} \\
+&\quad - \bigl(e^{3} (e+2) (a+1)^{2} + 1 - o^{2}\bigr)^{2} \\
+&\quad - \bigl((a^{2} - 1) y^{2} + 1 - x^{2}\bigr)^{2} \\
+&\quad - \bigl(16 r^{2} y^{4} (a^{2} - 1) + 1 - u^{2}\bigr)^{2} \\
+&\quad - \bigl(((a + u^{2}(u^{2} - a))^{2} - 1)(n + 4 d y)^{2} + 1 - (x + c u)^{2}\bigr)^{2} \\
+&\quad - (n + l + v - y)^{2} \\
+&\quad - \bigl((a^{2} - 1) l^{2} + 1 - m^{2}\bigr)^{2} \\
+&\quad - (a i + k + 1 - l - i)^{2} \\
+&\quad - \bigl(p + l(a - n - 1) + b(2 a n + 2 a - n^{2} - 2 n - 2) - m\bigr)^{2} \\
+&\quad - \bigl(q + y(a - p - 1) + s(2 a p + 2 a - p^{2} - 2 p - 2) - x\bigr)^{2} \\
+&\quad - \bigl(z + p l(a - p) + t(2 a p - p^{2} - 1) - p m\bigr)^{2} \Biggr)
+\end{aligned}`;
+
 
 function computeFinalValue(
   partials: PartialResult[],
