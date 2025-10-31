@@ -14,8 +14,15 @@ export function ResultCard({ label, value, status }: ResultCardProps) {
   return (
     <VStack align="stretch" gap={4}>
       <Text fontWeight="semibold">{label}</Text>
-      <Stack direction="row" justify="space-between" align="center">
-        <chakra.span fontFamily="mono" fontSize="lg">
+      <Stack
+        direction={{ base: 'column', md: 'row' }}
+        justify="space-between"
+        align={{ base: 'flex-start', md: 'center' }}
+        gap={4}
+        flexWrap="wrap"
+        w="full"
+      >
+        <chakra.span fontFamily="mono" fontSize="lg" wordBreak="break-all">
           {value.toString()}
         </chakra.span>
         <StatusBadge status={status} />
