@@ -15,7 +15,6 @@ import {
   Stack,
   Text,
   chakra,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
@@ -47,7 +46,7 @@ const SECTION_TITLES = {
 
 const descriptionText = {
   result:
-    'ユーザーが指定したパラメータを代入したMatijasevicの多項式の結果です。値の正負によってステータスが切り替わります。',
+    'ユーザーが指定したパラメータを代入したMatijasevicの多項式の結果です。正の値であれば素数であることが保証されます。',
   partials:
     '正の結果を得るためにゼロである必要がある部分式を個別に計算し、ステータスと共に一覧表示します。',
   parameters:
@@ -65,8 +64,6 @@ export default function HomePage() {
     resolver: zodResolver(parameterSchema),
     defaultValues: createDefaultParameterValues(),
   });
-
-  const parameterDisplayColumns = useBreakpointValue({ base: 1, md: 2, xl: 3 });
 
   const watchedValues = useWatch<ParameterFormValues>({ control });
 
@@ -159,7 +156,7 @@ export default function HomePage() {
                 onSubmit={(event) => event.preventDefault()}
               >
                 <Stack gap={6}>
-                  <SimpleGrid columns={parameterDisplayColumns ?? 1} gap={4}>
+                  <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={4}>
                     {PARAMETER_KEYS.map((key) => (
                       <ParameterInputField
                         key={key}
