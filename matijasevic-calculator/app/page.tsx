@@ -88,7 +88,19 @@ export default function HomePage() {
           <Text color="gray.600" fontSize="md">
             26個のパラメータを指定して多項式を代入し、結果と必要な部分式の達成度をリアルタイムに確認できます。
           </Text>
-          <BlockMath math={JSWW_POLY_TEX} />
+          <Accordion.Root collapsible>
+            <Accordion.Item value="">
+              <Accordion.ItemTrigger>
+                <Span flex="1" fontWeight="semibold">Matijasevic 多項式の明示式</Span>
+                <Accordion.ItemIndicator/>
+              </Accordion.ItemTrigger>
+              <Accordion.ItemContent>
+                <Accordion.ItemBody>
+                  <BlockMath math={JSWW_POLY_TEX} />
+                </Accordion.ItemBody>
+              </Accordion.ItemContent>
+            </Accordion.Item>
+          </Accordion.Root>
         </Stack>
 
         <Grid
