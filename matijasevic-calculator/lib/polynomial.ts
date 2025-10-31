@@ -96,8 +96,7 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
       const nPlus1 = params.n + 1n;
       return (
         16n * (kPlus1 ** 3n) * (params.k + 2n) * (nPlus1 ** 2n) +
-        1n -
-        params.f ** 2n
+        1n - params.f ** 2n
       );
     },
   },
@@ -315,7 +314,7 @@ function computeFinalValue(
   params: ParameterValues,
 ): bigint {
   const sumOfSquares = partials.reduce<bigint>(
-    (acc, partial) => acc + partial.value * partial.value,
+    (acc, partial) => acc + partial.value ** 2n,
     0n,
   );
   return (params.k + 2n) * (1n - sumOfSquares);

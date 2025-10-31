@@ -56,7 +56,6 @@ const descriptionText = {
 
 export default function HomePage() {
   const {
-    register,
     reset,
     control,
     formState: { errors },
@@ -171,7 +170,7 @@ export default function HomePage() {
                       <ParameterInputField
                         key={key}
                         name={key}
-                        register={register}
+                        control={control}
                         conditionCount={calculation.parameterConditions[key]}
                         error={errors[key]?.message}
                       />

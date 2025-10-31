@@ -4,28 +4,29 @@ import {
   FieldErrorText,
   FieldLabel,
   FieldRoot,
-  Input,
+  NumberInput,
+  InputGroup,
   Text,
 } from '@chakra-ui/react';
-import type { UseFormRegister } from 'react-hook-form';
+import { LuArrowRightLeft } from 'react-icons/lu';
+import { Controller, type Control } from 'react-hook-form';
 import { type ParameterKey } from '../../lib/polynomial';
 import { type ParameterFormValues } from '../../lib/parameters';
 import { ConditionBadge } from './condition-badge';
 
 type ParameterInputFieldProps = {
   name: ParameterKey;
-  register: UseFormRegister<ParameterFormValues>;
+  control: Control<ParameterFormValues>;
   conditionCount: number;
   error?: string;
 };
 
 export function ParameterInputField({
   name,
-  register,
+  control,
   conditionCount,
   error,
 }: ParameterInputFieldProps) {
-  const registration = register(name);
   const isInvalid = Boolean(error);
 
   return (
@@ -33,11 +34,32 @@ export function ParameterInputField({
       <FieldLabel fontSize="sm" fontWeight="semibold">
         {name}
       </FieldLabel>
-      <Input
-        {...registration}
-        aria-invalid={isInvalid}
-        inputMode="numeric"
-        placeholder="0"
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <NumberInput.Root
+            value={field.value ?? 0n}
+            onValueChange={
+              ({ value }) => field.onChange(value)
+            }
+            onBlur={field.onBlur}
+          >
+            <NumberInput.Control />
+            <InputGroup
+              startElementProps={{ pointerEvents: 'auto' }}
+              startElement={
+                <NumberInput.Scrubber>
+                  <LuArrowRightLeft />
+                </NumberInput.Scrubber>
+              }
+            >
+              <NumberInput.Input
+                inputMode="numeric"
+              />
+            </InputGroup>
+          </NumberInput.Root>
+        )}
       />
       <Text mt={1} fontSize="xs" color="gray.500">
         条件達成: <ConditionBadge count={conditionCount} />
