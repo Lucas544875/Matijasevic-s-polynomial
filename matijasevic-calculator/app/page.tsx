@@ -51,7 +51,7 @@ const descriptionText = {
   partials:
     '正の結果を得るためにゼロである必要がある部分式を個別に計算し、ステータスと共に一覧表示します。',
   parameters:
-    '26個のパラメータを指定し、関連する部分計算のゼロ条件がいくつ満たされているかを確認できます。',
+    '26個のパラメータを指定し、関連する部分式の条件がいくつ満たされているかを確認できます。',
 };
 
 export default function HomePage() {
@@ -163,6 +163,9 @@ export default function HomePage() {
                 onSubmit={(event) => event.preventDefault()}
               >
                 <Stack gap={6}>
+                  <Button colorScheme="teal" onClick={handleRandomize}>
+                    ランダムに設定
+                  </Button>
                   <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={4}>
                     {PARAMETER_KEYS.map((key) => (
                       <ParameterInputField
@@ -174,9 +177,6 @@ export default function HomePage() {
                       />
                     ))}
                   </SimpleGrid>
-                  <Button colorScheme="teal" onClick={handleRandomize}>
-                    ランダムに設定
-                  </Button>
                 </Stack>
               </chakra.form>
             </SectionContainer>
