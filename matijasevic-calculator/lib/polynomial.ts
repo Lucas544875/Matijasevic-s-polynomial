@@ -88,7 +88,7 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
   },
   {
     id: "p4",
-    label: "16*(k+1)^3*(k+2)*(n+1)^2 + 1 - f^2",
+    label: "16 * (k+1)^3 * (k+2) * (n+1)^2 + 1 - f^2",
     zeroRequired: true,
     parameters: ["k", "n", "f"],
     compute: (params) => {
@@ -102,7 +102,7 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
   },
   {
     id: "p5",
-    label: "e^3*(e+2)*(a+1)^2 + 1 - o^2",
+    label: "e^3 * (e+2) * (a+1)^2 + 1 - o^2",
     zeroRequired: true,
     parameters: ["e", "a", "o"],
     compute: (params) => {
@@ -114,7 +114,7 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
   },
   {
     id: "p6",
-    label: "(a^2 - 1)*y^2 + 1 - x^2",
+    label: "(a^2 - 1) * y^2 + 1 - x^2",
     zeroRequired: true,
     parameters: ["a", "y", "x"],
     compute: (params) =>
@@ -122,7 +122,7 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
   },
   {
     id: "p7",
-    label: "16*r^2*y^4*(a^2 - 1) + 1 - u^2",
+    label: "16 * r^2 * y^4 * (a^2 - 1) + 1 - u^2",
     zeroRequired: true,
     parameters: ["r", "y", "a", "u"],
     compute: (params) =>
@@ -136,7 +136,7 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
   {
     id: "p8",
     label:
-      "((a + u^2*(u^2 - a))^2 - 1)*(n + 4*d*y)^2 + 1 - (x + c*u)^2",
+      "((a + u^2 * (u^2 - a))^2 - 1) * (n + 4*d*y)^2 + 1 - (x + c*u)^2",
     zeroRequired: true,
     parameters: ["a", "u", "n", "d", "y", "x", "c"],
     compute: (params) => {
@@ -157,7 +157,7 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
   },
   {
     id: "p10",
-    label: "(a^2 - 1)*l^2 + 1 - m^2",
+    label: "(a^2 - 1) * l^2 + 1 - m^2",
     zeroRequired: true,
     parameters: ["a", "l", "m"],
     compute: (params) =>
