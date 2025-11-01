@@ -48,7 +48,7 @@ const SECTION_TITLES = {
 
 const descriptionText = {
   result:
-    'ユーザーが指定したパラメータを代入したMatijasevicの多項式の結果です。正の値であれば素数であることが保証されます。',
+    'ユーザーが指定したパラメータを代入したMatijasevičの多項式の結果です。正の値であれば素数であることが保証されます。',
   partials:
     '正の結果を得るためにゼロである必要がある部分式を個別に計算し、ステータスと共に一覧表示します。',
   parameters:
@@ -82,7 +82,7 @@ export default function HomePage() {
       <Stack gap={{ base: 8, md: 12 }}>
         <Stack gap={4}>
           <Heading as="h1" size="lg">
-            Matijasevic 多項式計算機
+            Matijasevič 多項式計算機
           </Heading>
           <Text color="gray.600" fontSize="md">
             26個のパラメータを多項式に代入した結果と、素数を返すために必要な条件の達成度をインタラクティブに確認できます。
@@ -90,13 +90,13 @@ export default function HomePage() {
           <Accordion.Root collapsible>
             <Accordion.Item value="">
               <Accordion.ItemTrigger>
-                <Span flex="1" fontWeight="semibold">Matijasevic 多項式とは</Span>
+                <Span flex="1" fontWeight="semibold">Matijasevič 多項式とは</Span>
                 <Accordion.ItemIndicator/>
               </Accordion.ItemTrigger>
               <Accordion.ItemContent>
                 <Accordion.ItemBody>
                   <Text fontSize="sm" color="gray.600">
-                    Matijasevic 多項式とは、値域の正の部分が素数全体の集合と一致するという性質を持つ以下の26変数多項式のことです。
+                    Matijasevič 多項式とは、値域の正の部分が素数全体の集合と一致するという性質を持つ以下の26変数多項式のことです。
                     <InlineMath>
                       P(a,b, ... , z) = (k+2)\left(1-\sum (多項式)^2 \right)
                     </InlineMath>

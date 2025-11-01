@@ -58,7 +58,7 @@ interface PartialDefinition {
   compute: (params: ParameterValues) => bigint;
 }
 
-// Each partial corresponds to one squared term from Matijasevic's polynomial.
+// Each partial corresponds to one squared term from Matijasevič's polynomial.
 const PARTIAL_DEFINITIONS: PartialDefinition[] = [
   {
     id: "p1",

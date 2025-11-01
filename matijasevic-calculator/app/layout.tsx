@@ -4,9 +4,9 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "Matijasevic Polynomial Calculator",
+  title: "Matijasevič Polynomial Calculator",
   description:
-    "26変数のMatijasevic多項式を計算できるインタラクティブアプリ",
+    "26変数のMatijasevič多項式を計算できるインタラクティブアプリ",
 };
 
 export default function RootLayout({

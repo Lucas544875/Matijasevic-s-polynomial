@@ -1,6 +1,6 @@
-# Matijasevic-s-polynomial
+# Matijasevič-s-polynomial
 
-Matijasevicの多項式をインタラクティブに計算させられるwebアプリ
+Matijasevičの多項式をインタラクティブに計算させられるwebアプリ
 
 画面は以下の領域からなります
 - 計算結果
