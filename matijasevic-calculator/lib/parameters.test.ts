@@ -25,6 +25,18 @@ describe('parameterSchema', () => {
     if (result.success) return;
     expect(result.error.issues[0].message).toBe('0以上の整数を入力してください');
   });
+
+  it('accepts extremely large integers', () => {
+    const bigInteger =
+      '901690358098896161685556879749949186326380713409290912';
+    const values = createDefaultParameterValues();
+    values.a = bigInteger;
+
+    const result = parameterSchema.safeParse(values);
+    expect(result.success).toBe(true);
+    const params = convertInputsToParameters(values);
+    expect(params.a.toString()).toBe(bigInteger);
+  });
 });
 
 describe('convertInputsToParameters', () => {

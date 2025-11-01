@@ -4,15 +4,13 @@ import {
   FieldErrorText,
   FieldLabel,
   FieldRoot,
-  NumberInput,
-  InputGroup,
   Text,
 } from '@chakra-ui/react';
-import { LuArrowRightLeft } from 'react-icons/lu';
 import { Controller, type Control } from 'react-hook-form';
 import { type ParameterKey } from '../../lib/polynomial';
 import { type ParameterFormValues } from '../../lib/parameters';
 import { ConditionBadge } from './condition-badge';
+import { BigIntInput } from './bigint-input';
 
 type ParameterInputFieldProps = {
   name: ParameterKey;
@@ -30,6 +28,7 @@ export function ParameterInputField({
   error,
 }: ParameterInputFieldProps) {
   const isInvalid = Boolean(error);
+  const errorId = error ? `${name}-error` : undefined;
 
   return (
     <FieldRoot invalid={isInvalid}>
@@ -41,28 +40,15 @@ export function ParameterInputField({
         control={control}
         defaultValue="1"
         render={({ field }) => (
-          <NumberInput.Root
-            value={field.value ?? '1'}
-            min={0}
-            onValueChange={
-              ({ value }) => field.onChange(value)
-            }
+          <BigIntInput
+            id={name}
+            name={name}
+            value={field.value ?? ''}
+            onChange={field.onChange}
             onBlur={field.onBlur}
-          >
-            <NumberInput.Control />
-            <InputGroup
-              startElementProps={{ pointerEvents: 'auto' }}
-              startElement={
-                <NumberInput.Scrubber>
-                  <LuArrowRightLeft />
-                </NumberInput.Scrubber>
-              }
-            >
-              <NumberInput.Input
-                inputMode="numeric"
-              />
-            </InputGroup>
-          </NumberInput.Root>
+            aria-invalid={isInvalid}
+            aria-describedby={errorId}
+          />
         )}
       />
       <Text mt={1} fontSize="xs" color="gray.500">
@@ -73,7 +59,7 @@ export function ParameterInputField({
         />
       </Text>
       {error ? (
-        <FieldErrorText fontSize="xs" mt={1}>
+        <FieldErrorText id={errorId} fontSize="xs" mt={1}>
           {error}
         </FieldErrorText>
       ) : null}
