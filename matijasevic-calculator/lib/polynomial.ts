@@ -245,7 +245,7 @@ export const PARAMETER_CONDITION_TOTALS: Record<ParameterKey, number> = (() => {
 
 export const DEFAULT_RANDOM_RANGE = {
   min: 0,
-  max: 10,
+  max: 100,
 } as const;
 
 export function generateRandomParameters(
