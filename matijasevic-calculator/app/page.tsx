@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import {
   Accordion,
   Button,
@@ -66,9 +67,9 @@ export default function HomePage() {
 
   const watchedValues = useWatch<ParameterFormValues>({ control });
 
-  const calculation = evaluatePolynomial(
-    convertInputsToParameters(watchedValues),
-  );
+  const calculation = useMemo(() => {
+    return evaluatePolynomial(convertInputsToParameters(watchedValues));
+  }, [watchedValues]);
 
   const handleRandomize = () => {
     const randomValues = generateRandomParameters();
