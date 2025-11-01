@@ -37,10 +37,10 @@ export function ParameterInputField({
       <Controller
         name={name}
         control={control}
-        defaultValue="0"
+        defaultValue="1"
         render={({ field }) => (
           <NumberInput.Root
-            value={field.value ?? '0'}
+            value={field.value ?? '1'}
             min={0}
             onValueChange={
               ({ value }) => field.onChange(value)

@@ -41,7 +41,7 @@ export type ParameterFormValues = z.infer<typeof parameterSchema>;
 
 export function createDefaultParameterValues(): ParameterFormValues {
   return Object.fromEntries(
-    PARAMETER_KEYS.map((key) => [key, '0']),
+    PARAMETER_KEYS.map((key) => [key, '1']),
   ) as ParameterFormValues;
 }
 
@@ -49,7 +49,7 @@ export function convertInputsToParameters(
   inputs: Partial<ParameterFormValues>,
 ): ParameterValues {
   const entries = PARAMETER_KEYS.map<[ParameterKey, bigint]>((key) => {
-    const source = inputs[key] ?? '0';
+    const source = inputs[key] ?? '1';
     const rawValue = source.trim();
     return [key, parseBigIntSafely(rawValue)];
   });
