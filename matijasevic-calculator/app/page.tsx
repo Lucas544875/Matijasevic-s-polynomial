@@ -96,7 +96,7 @@ export default function HomePage() {
               <Accordion.ItemContent>
                 <Accordion.ItemBody>
                   <Text fontSize="sm" color="gray.600">
-                    Matijasevič 多項式とは、値域の正の部分が素数全体の集合と一致するという性質を持つ以下の26変数多項式のことです。
+                    Matijasevič 多項式とは、値域の正の部分が素数全体の集合と一致するという性質を持つ、自然数上で定義された以下の26変数の多項式のことです。
                     <InlineMath>
                       P(a,b, ... , z) = (k+2)\left(1-\sum (多項式)^2 \right)
                     </InlineMath>
