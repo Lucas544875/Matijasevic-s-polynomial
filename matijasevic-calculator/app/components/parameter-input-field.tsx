@@ -18,6 +18,7 @@ type ParameterInputFieldProps = {
   name: ParameterKey;
   control: Control<ParameterFormValues>;
   conditionCount: number;
+  totalConditionCount: number;
   error?: string;
 };
 
@@ -25,6 +26,7 @@ export function ParameterInputField({
   name,
   control,
   conditionCount,
+  totalConditionCount,
   error,
 }: ParameterInputFieldProps) {
   const isInvalid = Boolean(error);
@@ -64,7 +66,11 @@ export function ParameterInputField({
         )}
       />
       <Text mt={1} fontSize="xs" color="gray.500">
-        条件達成: <ConditionBadge count={conditionCount} />
+        条件達成:{' '}
+        <ConditionBadge
+          count={conditionCount}
+          total={totalConditionCount}
+        />
       </Text>
       {error ? (
         <FieldErrorText fontSize="xs" mt={1}>

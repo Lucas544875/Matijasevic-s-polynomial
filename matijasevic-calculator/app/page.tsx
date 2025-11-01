@@ -23,6 +23,7 @@ import {
   JSWW_POLY_TEX,
   evaluatePolynomial,
   generateRandomParameters,
+  PARAMETER_CONDITION_TOTALS,
 } from '../lib/polynomial';
 import {
   ParameterInputField,
@@ -172,6 +173,7 @@ export default function HomePage() {
                         name={key}
                         control={control}
                         conditionCount={calculation.parameterConditions[key]}
+                        totalConditionCount={PARAMETER_CONDITION_TOTALS[key]}
                         error={errors[key]?.message}
                       />
                     ))}

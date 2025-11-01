@@ -227,6 +227,22 @@ const PARTIAL_DEFINITIONS: PartialDefinition[] = [
   },
 ];
 
+export const PARAMETER_CONDITION_TOTALS: Record<ParameterKey, number> = (() => {
+  const totals = Object.fromEntries(
+    PARAMETER_KEYS.map((key) => [key, 0]),
+  ) as Record<ParameterKey, number>;
+
+  for (const definition of PARTIAL_DEFINITIONS) {
+    if (!definition.zeroRequired) continue;
+
+    for (const parameter of definition.parameters) {
+      totals[parameter] += 1;
+    }
+  }
+
+  return totals;
+})();
+
 export const DEFAULT_RANDOM_RANGE = {
   min: 0,
   max: 10,
