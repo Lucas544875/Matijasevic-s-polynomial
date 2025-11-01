@@ -15,7 +15,7 @@ import {
   Text,
   chakra,
 } from '@chakra-ui/react';
-import { BlockMath } from 'react-katex';
+import { BlockMath, InlineMath } from 'react-katex';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import {
@@ -82,19 +82,26 @@ export default function HomePage() {
       <Stack gap={{ base: 8, md: 12 }}>
         <Stack gap={4}>
           <Heading as="h1" size="lg">
-            Matijasevic 多項式インタラクティブ計算
+            Matijasevic 多項式計算機
           </Heading>
           <Text color="gray.600" fontSize="md">
-            26個のパラメータを指定して多項式を代入し、結果と必要な部分式の達成度をリアルタイムに確認できます。
+            26個のパラメータを多項式に代入した結果と、素数を返すために必要な条件の達成度をインタラクティブに確認できます。
           </Text>
           <Accordion.Root collapsible>
             <Accordion.Item value="">
               <Accordion.ItemTrigger>
-                <Span flex="1" fontWeight="semibold">Matijasevic 多項式</Span>
+                <Span flex="1" fontWeight="semibold">Matijasevic 多項式とは</Span>
                 <Accordion.ItemIndicator/>
               </Accordion.ItemTrigger>
               <Accordion.ItemContent>
                 <Accordion.ItemBody>
+                  <Text fontSize="sm" color="gray.600">
+                    Matijasevic 多項式とは、値域の正の部分が素数全体の集合と一致するという性質を持つ以下の26変数多項式のことです。
+                    <InlineMath>
+                      P(a,b, ... , z) = (k+2)\left(1-\sum (多項式)^2 \right)
+                    </InlineMath>
+                    という形をしており、出力が正であるためには、各多項式がすべて0であるという条件が満たされる必要があります。
+                  </Text>
                   <BlockMath math={JSWW_POLY_TEX} />
                 </Accordion.ItemBody>
               </Accordion.ItemContent>
