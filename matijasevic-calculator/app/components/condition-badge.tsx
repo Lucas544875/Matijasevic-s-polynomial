@@ -8,9 +8,14 @@ type ConditionBadgeProps = {
 };
 
 export function ConditionBadge({ count, total }: ConditionBadgeProps) {
-  const colorScheme = count > 0 ? 'green' : 'gray';
+  const colorPalette =
+    total > 0 && count === total
+      ? 'green'
+      : count > 0
+        ? 'yellow'
+        : 'gray';
   return (
-    <Badge colorScheme={colorScheme} variant="subtle">
+    <Badge colorPalette={colorPalette} variant="subtle">
       {count}/{total}
     </Badge>
   );
